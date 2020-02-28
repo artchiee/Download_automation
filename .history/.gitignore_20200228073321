@@ -1,0 +1,6 @@
+*.pyc
+*.txt
+/down_test.py
+.down_test.py
+/env
+.vscode/
