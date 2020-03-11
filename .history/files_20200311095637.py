@@ -1,12 +1,5 @@
 
-class Details:
-    def __init__(self, name, year, duration_time, quality_type, quality_size, stars):
-        self.name = name
-        self.year = year
-        self.duration_time = duration_time
-        self.quality_type = quality_type
-        self.quality_size = quality_size
-        self.stars = stars
+class Files:
 
     def serialize(self):
         return {

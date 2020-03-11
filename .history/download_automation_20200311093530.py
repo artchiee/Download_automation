@@ -1,7 +1,7 @@
 import json
 import requests
 from bs4 import BeautifulSoup
-from files import Details
+from files import  Files
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
@@ -118,9 +118,9 @@ def download_files():
                 stars = tbody_loop.find_elements_by_xpath('//tr[5]/td[2]/strong/span').text
             except:
                 Exception()
-                should_add = False
+            should_add = False
                 
-            print('*****'*8)
+            print('*****'*5)
 
             # Next : is to select quality and download
             # Before the page scroll it will wiat 6s to fully load
@@ -172,7 +172,7 @@ def download_files():
                 if btn_link:
                     # Will handle the ad just to make sure everything goes well
                     try:
-                        print('Found url : ', btn_link, '\n')
+                        print('Found url : ', btn_link)
                         driver.implicitly_wait(3)
                         a_tag.click()
                     except window_after:
@@ -203,7 +203,7 @@ def download_files():
     year = ''
     quality_type = ""
     quality_size = ""
-    #url = ""
+    url = ""
 
     print('Json Data has been created\n')
     # Saving data into json file to access later 
@@ -219,21 +219,29 @@ def download_files():
         should_add = False
 
     # save All my data (class)
-    my_data = Details(name, year, duration_time, quality_type, quality_size, stars)
+    my_data = Files()
     if my_data:
         final_data.append(my_data)
     counter = counter + 1
 
-    # Writing my data into a simple text file
-    #import csv
-    with open('information.json', 'w') as json_file:
-        data = {}
-        data["Files"] = []
-        for f_data in final_data:
-            data["Files"].append(f_data.serialize())
-        json.dump(data, json_file, sort_keys=True, indent=4)
+# Writing my data into a simple text file
+import csv
+with open('My_data.csv', 'w') as write_in:
+    csv_file = csv.writer(write_in)
+    csv_file.writerow(final_data)
 
-    print(json.dumps(name.serialize(), indent=4, sort_keys=True))
-    print(json.dumps(year.serialize(), indent=4, sort_keys=True))
+#SAve to json file
+with open('Data.json', 'w') as json_file:
+    serialized_data= {}
+    serialized_data["Files"] = []
+    for all_ in final_data:
+        serialized_data["Files"].append(all_.serialize())
+    json.dump(final_data, json_file, indent=4, default=transform)
+
+print(json.dumps(final_data.serialize(), indent=4))
+print('data for test purposes \n')
+print(json.dumps(name.serialize(),sort_keys=True ,indent=4))
+print(json.dumps(url.serialize(),sort_keys=True ,indent=4))
+
 
 download_files()

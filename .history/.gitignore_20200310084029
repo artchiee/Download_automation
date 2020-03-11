@@ -1,6 +1,6 @@
 *.pyc
 *.log
-/code_tst.txt
+*.txt
 /down_test.py
 /env
 .vscode/
