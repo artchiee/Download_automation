@@ -120,7 +120,7 @@ def download_files():
                 Exception()
                 should_add = False
                 
-            print('*****'*8)
+            print('*****',*8)
 
             # Next : is to select quality and download
             # Before the page scroll it will wiat 6s to fully load
@@ -172,7 +172,7 @@ def download_files():
                 if btn_link:
                     # Will handle the ad just to make sure everything goes well
                     try:
-                        print('Found url : ', btn_link, '\n')
+                        print('Found url : ', btn_link)
                         driver.implicitly_wait(3)
                         a_tag.click()
                     except window_after:
@@ -203,7 +203,7 @@ def download_files():
     year = ''
     quality_type = ""
     quality_size = ""
-    #url = ""
+    url = ""
 
     print('Json Data has been created\n')
     # Saving data into json file to access later 

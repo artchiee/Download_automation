@@ -1,7 +1,7 @@
 import json
 import requests
 from bs4 import BeautifulSoup
-from files import Details
+from files import Files
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import time
@@ -82,7 +82,7 @@ def download_files():
 
             if title_rs and link_rs:
                 print('Found Title match : ', title_rs,
-                      '\n', 'Full movie url : ',  link_rs, '\n')
+                      '\n', 'Full movie url : ',  link_rs)
             else:
                 print('Nothing Found ')
 
@@ -91,36 +91,29 @@ def download_files():
             url_match = [mid_url.search(var).group()
                          for var in link_rs if mid_url.search(var)]
             if url_match:
-                print('mid url taken is : ', url_match ,'\n')
+                print('mid url taken is : ', url_match)
                 convertion = ''.join(link_rs)
                 # Enter the requested url
                 driver.implicitly_wait(2)
                 driver.get(convertion)
             else:
                 print('exception')
-
-            driver.implicitly_wait(10)
-            all_data = []
-            counter = 0
-            # will initiate a for loop here
-            table_loop = driver.find_element_by_xpath('//*[@id="mainLoad"]/div[2]/div[2]/table')
-            tbody_loop = table_loop.find_element_by_tag_name('tbody')
-           # tr_loop = tbody_loop.find_elements_by_tag_name('tr')
-
-            #for i in tbody_loop.find_elements_by_tag_name('tr[%d]'%counter):
-
+            
             # information to save as json data objs
             should_add = True
-            duration_time = ''
+            name = ''
+            year = ''
+            quality_type = ''
+            quality_size = ''
+            url = ''
             stars = ''
             try:
-                duration_time  = tbody_loop.find_elements_by_xpath('//tr[6]/td[2]').text
-                stars = tbody_loop.find_elements_by_xpath('//tr[5]/td[2]/strong/span').text
+                name = driver.find_element_by_xpath('//*[@id="mainLoad"]/div[1]/div').text
+                year = name.find_element_by_tag_name('a').text
+                stars = driver.find_element_by_xpath('//*[@id="mainLoad"]/div[2]/div[2]/table/tbody/tr[5]/td[2]/strong/span').text
             except:
-                Exception()
-                should_add = False
-                
-            print('*****'*8)
+                print('exception')
+
 
             # Next : is to select quality and download
             # Before the page scroll it will wiat 6s to fully load
@@ -167,12 +160,12 @@ def download_files():
                     a_tag = download_btn.find_element_by_tag_name('a')
                     btn_link = a_tag.get_attribute('data-url')
                 else:
-                    print('Only 1080 or 720 allowed')
+                    print('Only 1080 or 720 allowed  ')
                     # if True:
                 if btn_link:
                     # Will handle the ad just to make sure everything goes well
                     try:
-                        print('Found url : ', btn_link, '\n')
+                        print('Found url : ', btn_link)
                         driver.implicitly_wait(3)
                         a_tag.click()
                     except window_after:
@@ -197,43 +190,48 @@ def download_files():
     except KeyboardInterrupt:
         print('Keybord Interruption')
 
-    counter = 0
 
+'''
+    counter = 0
     name = ""
-    year = ''
     quality_type = ""
     quality_size = ""
-    #url = ""
+    url = ""
 
     print('Json Data has been created\n')
     # Saving data into json file to access later 
     final_data = [] #will store the data got from each element
     try:
         name = search_for
-        year  = movie_year
         quality_type = quality_choice
         quality_size = "1.6GB"
+        url = download_link
 
     except: 
         print('exception')
-        should_add = False
-
-    # save All my data (class)
-    my_data = Details(name, year, duration_time, quality_type, quality_size, stars)
+    my_data = Files(name, quality_type, quality_size, url)
     if my_data:
         final_data.append(my_data)
     counter = counter + 1
+'''
+# # Writing my data into a simple text file
+# import csv
+# with open('My_data.csv', 'w') as write_in:
+#     csv_file = csv.writer(write_in)
+#     csv_file.writerow(final_data)
 
-    # Writing my data into a simple text file
-    #import csv
-    with open('information.json', 'w') as json_file:
-        data = {}
-        data["Files"] = []
-        for f_data in final_data:
-            data["Files"].append(f_data.serialize())
-        json.dump(data, json_file, sort_keys=True, indent=4)
+# SAve to json file
+# with open('Data.json', 'w') as json_file:
+#     serialized_data= {}
+#     serialized_data["Files"] = []
+#     for all_ in final_data:
+#         serialized_data["Files"].append(all_.serialize())
+#     json.dump(final_data, json_file, indent=4, default=transform)
 
-    print(json.dumps(name.serialize(), indent=4, sort_keys=True))
-    print(json.dumps(year.serialize(), indent=4, sort_keys=True))
+# print(json.dumps(final_data.serialize(), indent=4))
+# print('data for test purposes \n')
+# print(json.dumps(name.serialize(),sort_keys=True ,indent=4))
+# print(json.dumps(url.serialize(),sort_keys=True ,indent=4))
+
 
 download_files()

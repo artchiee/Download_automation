@@ -1,0 +1,46 @@
+table_tg = //*[@id="watch_dl"]/table
+
+size_xpath = //*[@id="watch_dl"]/table/tbody/tr[1]/td[3]
+
+tar_class = //*[@id="watch_dl"]/table/tbody/tr[1]/td[4]
+
+green_btn = /html/body/div[1]/div/p[2]/a[1]
+
+# code titel match anything 
+---------------------------------
+import re 
+
+all_movies = ['Abduction (2011)','abduction (2013)' ,  
+'Mission : impossible : Rogue Nation (2015)', 
+'Mission : impossible - fall-out (2018)' ,'Home alone : (2000)']
+
+search_for = input(str('Movie : '))
+movie_year  = input(str('Year : '))
+
+# Need to match any title 
+
+# Pattern in the middle need to be optional 
+ 
+match_title = re.compile(search_for + '\.*|\s*|\w+?' + '\(%s\)+'%str(movie_year), re.I)
+title_rs = list(filter(match_title.search, all_movies))
+
+if title_rs:
+    print('Match :' , title_rs)
+else:
+    print('exception')
+
+
+            # final part before downloading 
+            driver.implicitly_wait(6)
+            green_btn = driver.find_element_by_xpath('/html/body/div[1]/div/p[2]/a[1]')
+            # Must check if <a> class has _reload in it 
+            _check = ActionChains(driver)
+            _check.click(green_btn)
+            _check.perform()
+
+
+
+test amazone : 
+id_search = //*[@id="twotabsearchtextbox"]
+
+    
