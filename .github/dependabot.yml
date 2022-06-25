@@ -5,17 +5,6 @@
 
 version: 2
 updates:
-
-  # Maintain dependencies for pipenv
-  - package-ecosystem: "pipenv" # See documentation for possible values
-    directory: "/" # Location of package manifests
-    schedule:
-     # if weekly is selected, day can be alterted to make maintenance
-      interval: "weekly"
-      day: "sunday"
-      time: "11:00"
-      timezone: "Europe/London"
-
   
   # Maintain dependencies for pip
   - package-ecosystem: "pip" # See documentation for possible values
