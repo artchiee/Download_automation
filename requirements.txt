@@ -5,8 +5,8 @@
 #    pipenv lock --requirements
 #
 
--i https://pypi.org/simple
-certifi==2019.11.28
+-i https://pypi.org/simple/
+certifi==2022.6.15
 chardet==3.0.4
 idna==2.8
 lxml==4.9.0
