@@ -1,6 +1,5 @@
 import json
 import requests
-from bs4 import BeautifulSoup
 from files import Details
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
