@@ -38,7 +38,7 @@
                 "sha256:fe86415d55e84719d75f8b69414f6438ac3547d2078ab91b67e779ef69378412"
             ],
             "index": "pypi",
-            "version": "==2022.6.15"
+            "version": "==2022.12.07"
         },
         "chardet": {
             "hashes": [
