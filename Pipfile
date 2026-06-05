@@ -8,13 +8,13 @@ jedi = "*"
 autopep8 = "*"
 
 [packages]
-certifi = "*"
-chardet = "*"
-idna = "*"
-requests = "*"
-selenium = "*"
+certifi = "==2022.12.07"
+chardet = "==3.0.4"
+idna = "==2.8"
+requests = "==2.31.0"
+selenium = "==4.8.2"
 urllib3 = "*"
 lxml = "*"
 
 [requires]
-python_version = "3.11"
+python_version = "3.11" 
