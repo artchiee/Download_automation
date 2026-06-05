@@ -10,7 +10,7 @@ autopep8 = "*"
 [packages]
 certifi = "==2022.12.07"
 chardet = "==3.0.4"
-idna = "==2.8"
+idna = "==3.15"
 requests = "==2.31.0"
 selenium = "==4.8.2"
 urllib3 = "*"
