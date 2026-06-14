@@ -11,7 +11,7 @@ packaging==26.2
 pipenv==2026.6.1
 platformdirs==4.10.0
 PySocks==1.7.1
-python-discovery==1.4.0
+python-discovery==1.4.2
 requests==2.34.2
 selenium==4.44.0
 setuptools==82.0.1
