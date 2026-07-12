@@ -1,6 +1,6 @@
 attrs==26.1.0
 certifi==2026.5.20
-charset-normalizer==3.4.7
+charset-normalizer==3.4.9
 distlib==0.4.1
 filelock==3.29.1
 h11==0.16.0
